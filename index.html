@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>扫雷游戏</title>
+    <link rel="stylesheet" href="../common_game_style.css">
+    <style>
+    /* 可补充扫雷专属样式 */
+    </style>
+</head>
+<body>
+    <h1>扫雷游戏</h1>
+    <div class="info">
+        <span id="mineCount">地雷数: 0</span>
+        <span id="flagCount" style="margin-left:20px;">已插旗: 0</span>
+    </div>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <button class="btn" onclick="location.reload()">重新开始</button>
+    <div class="audio-bar">
+        <button id="musicBtn" class="btn" style="padding:4px 16px;font-size:0.9em;">🔊 背景音乐</button>
+    </div>
+    <audio id="bgm" src="../assets/bolizhiqingBGM.MP3" loop autoplay></audio>
+    <audio id="openSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9b7b7b.mp3"></audio>
+    <audio id="flagSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9b7b7b.mp3"></audio>
+    <audio id="mineSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9b7b7b.mp3"></audio>
+    <audio id="winSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9b7b7b.mp3"></audio>
+    <script src="game.js"></script>
+    <script>
+    // 背景音乐控制
+    const bgm = document.getElementById('bgm');
+    bgm.volume = 0.8;
+    const musicBtn = document.getElementById('musicBtn');
+    let musicPlaying = false;
+    // 自动播放尝试
+    window.onload = function() {
+        if (bgm.paused) {
+            bgm.play().catch(()=>{});
+        }
+    };
+    musicBtn.onclick = function() {
+        if (musicPlaying) {
+            bgm.pause();
+            musicBtn.textContent = '🔇 背景音乐';
+        } else {
+            bgm.play();
+            musicBtn.textContent = '🔊 背景音乐';
+        }
+        musicPlaying = !musicPlaying;
+    };
+    </script>
+</body>
+</html> 
